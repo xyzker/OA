@@ -23,5 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <s:a action="list" namespace="/role">角色列表</s:a><br>
+    <s:a action="list" namespace="/department">岗位列表</s:a><br>
   </body>
 </html>

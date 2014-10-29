@@ -1,15 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
     <title>岗位列表</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script language="javascript" src='<s:url value="/script/jquery.js" />' ></script>
-    <script language="javascript" src='<s:url value="/script/pageCommon.js" />'></script>
-    <script language="javascript" src='<s:url value="/script/PageUtils.js" />'></script>
-    <link type="text/css" rel="stylesheet" href='<s:url value="/style/blue/pageCommon.css" />' />
-    <script type="text/javascript">
-    </script>
+   <%@ include file="/WEB-INF/content/public/commons.jspf" %>
 </head>
 <body>
  
