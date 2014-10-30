@@ -11,6 +11,7 @@ public interface IService<T> {
 	public void delete(T baseBean);
 	public List<T> list(String hql);		//查询实体
 	public List<T> list(String hql, Object... params);
+	public List<T> getByIds(Integer[] ids);
 	public T uniqueResult(String hql, Object... params);    //查询单个实体
 	public int getTotalCount(String hql, Object... params);		//查询页数
 	public List<T> list(String hql, int firstResult, int maxSize, 

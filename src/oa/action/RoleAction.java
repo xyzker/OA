@@ -2,6 +2,8 @@ package oa.action;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import oa.model.Role;
 import oa.service.IRoleService;
 
@@ -15,6 +17,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class RoleAction extends ActionSupport {
 	private static final long serialVersionUID = 3203227168651374872L;
 	
+	@Resource
 	private IRoleService roleService;
 	private List<Role> roleList;
 	private Role role;
@@ -44,7 +47,8 @@ public class RoleAction extends ActionSupport {
 	
 	@Action(value="/role/delete", results={@Result(type="redirectAction", location="list")})
 	public String delete(){
-		roleService.deleteById(role.getId());
+		role = roleService.get(role.getId());
+		roleService.delete(role);
 		return SUCCESS;
 	}
 

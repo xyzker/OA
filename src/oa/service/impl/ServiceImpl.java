@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import oa.dao.IDao;
 import oa.service.IService;
+import oa.util.StringUtil;
 
 @Transactional
 public abstract class ServiceImpl<T> implements IService<T>{
@@ -76,6 +77,15 @@ public abstract class ServiceImpl<T> implements IService<T>{
 
 	public List<T> list(String hql) {
 		return dao.list(hql);
+	}
+	
+	@SuppressWarnings("all")
+	public List<T> getByIds(Integer[] ids){
+		if(ids == null || ids.length == 0){
+			return null;
+		} else {
+			return dao.list("from " + clazz.getSimpleName() + " where id in (" + StringUtil.arr2Str(ids) +")");
+		}
 	}
 
 	public void saveOrUpdate(T baseBean) {

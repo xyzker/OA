@@ -2,6 +2,8 @@ package oa.action;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import oa.model.Department;
 import oa.service.IDepartmentService;
 
@@ -15,6 +17,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class DepartmentAction extends ActionSupport {
 	private static final long serialVersionUID = 3203227168651374872L;
 	
+	@Resource
 	private IDepartmentService departmentService;
 	private List<Department> departmentList;
 	private Department department;

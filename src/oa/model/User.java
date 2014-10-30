@@ -6,8 +6,11 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OrderBy;
 
 /*
  * ÓÃ»§
@@ -19,7 +22,10 @@ public class User {
 	private int id;
 	@ManyToOne
 	private Department department;
-	@ManyToMany(mappedBy = "users")
+	@ManyToMany
+	@JoinTable(name="user_role", joinColumns = {@JoinColumn(name = "user_id")}, 
+			inverseJoinColumns = {@JoinColumn(name = "role_id")})
+	@OrderBy("id asc")
 	private Set<Role> roles = new HashSet<Role>();
 	
 	private String loginName; // µÇÂ¼Ãû

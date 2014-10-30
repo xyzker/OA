@@ -6,8 +6,6 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 /*
@@ -21,9 +19,7 @@ public class Role {
 	private String name;
 	private String description;
 	
-	@ManyToMany
-	@JoinTable(name="role_user", joinColumns = {@JoinColumn(name = "role_id")}, 
-			inverseJoinColumns = {@JoinColumn(name = "user_id")})
+	@ManyToMany(mappedBy = "roles")
 	private Set<User> users = new HashSet<User>();
 	
 	public int getId() {
