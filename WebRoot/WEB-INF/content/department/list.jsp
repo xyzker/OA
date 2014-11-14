@@ -52,7 +52,7 @@
     <div id="TableTail">
         <div id="TableTail_inside">
             <s:a action="addUI?parent.id=%{parent.id}" namespace="/department"><img src="<s:url value='/style/images/createNew.png' />" /></s:a>
-       		<s:a action="list?parent.id=%{parent.parent.id}"><img src="<s:url value='/style/blue/images/button/ReturnToPrevLevel.png'/>" /></s:a>
+       		<s:a action="list?parent.id=%{parent.parent.id}" namespace="/department"><img src="<s:url value='/style/blue/images/button/ReturnToPrevLevel.png'/>" /></s:a>
         </div>
     </div>
 </div>

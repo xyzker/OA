@@ -6,7 +6,10 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
 
 /*
  * ¸ÚÎ»
@@ -21,6 +24,12 @@ public class Role {
 	
 	@ManyToMany(mappedBy = "roles")
 	private Set<User> users = new HashSet<User>();
+	
+	@ManyToMany
+	@JoinTable(name="role_privilege", joinColumns = {@JoinColumn(name = "role_id")}, 
+			inverseJoinColumns = {@JoinColumn(name = "privilege_id")})
+	@OrderBy("id asc")
+	private Set<Privilege> privileges = new HashSet<Privilege>();
 	
 	public int getId() {
 		return id;
@@ -45,6 +54,12 @@ public class Role {
 	}
 	public Set<User> getUsers() {
 		return users;
+	}
+	public void setPrivileges(Set<Privilege> privileges) {
+		this.privileges = privileges;
+	}
+	public Set<Privilege> getPrivileges() {
+		return privileges;
 	}
 	
 }

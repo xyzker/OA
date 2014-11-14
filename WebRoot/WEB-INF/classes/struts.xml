@@ -11,6 +11,23 @@
  	<constant name="struts.multipart.maxSize" value="10000000"></constant><!-- 最大上传表单10M -->
  	
  	<package name="oa" extends="struts-default,json-default" namespace="/">
-	
+ 		<interceptors>
+			<interceptor name="rightFilter" class="oa.interceptor.RightFilterInterceptor"></interceptor>
+			<interceptor-stack name="rightFilterStack">
+ 				<interceptor-ref name="rightFilter"></interceptor-ref>
+ 				<interceptor-ref name="defaultStack"></interceptor-ref>
+ 			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="rightFilterStack"></default-interceptor-ref>
+ 	
+ 		<global-results>
+			<result name="login">/WEB-INF/content/user/loginUI.jsp</result>
+			<result name="error_no_right">/noPrivilege.jsp</result>
+		</global-results>
+ 	
+		<action name="index">
+			<result>/index.jsp</result>
+		</action>
  	</package>
  </struts>

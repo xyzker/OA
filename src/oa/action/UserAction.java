@@ -17,6 +17,8 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
 import org.apache.commons.codec.digest.DigestUtils;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 @ParentPackage("oa")
@@ -109,6 +111,34 @@ public class UserAction extends ActionSupport {
 		String md5Password = DigestUtils.md5Hex("1234");
 		user.setPassword(md5Password);	//初始化密码为1234
 		userService.saveOrUpdate(user);
+		return SUCCESS;
+	}
+	
+	@Action(value="/user/loginUI")
+	public String loginUI(){
+		return SUCCESS;
+	}
+	
+	@Action(value="/user/login", results = {@Result(type="redirectAction", params = {
+			"actionName","index","namespace","/"}), @Result(name="input",  location=
+				"/WEB-INF/content/user/loginUI.jsp")})
+	public String login(){
+		user.setPassword(DigestUtils.md5Hex(user.getPassword()));
+		user = userService.getUser(user.getLoginName(), user.getPassword());
+		if(user != null){
+			user = userService.getUserAllInformation(user.getId());
+			ActionContext.getContext().getSession().put("user", user);
+			return SUCCESS;
+		}
+		else {
+			addActionError("用户名或密码不正确！");
+			return INPUT;
+		}
+	}
+	
+	@Action(value="/user/logout")
+	public String logout(){
+		ActionContext.getContext().getSession().put("user", null);
 		return SUCCESS;
 	}
 

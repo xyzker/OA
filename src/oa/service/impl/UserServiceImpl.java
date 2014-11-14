@@ -2,6 +2,7 @@ package oa.service.impl;
 
 import java.util.List;
 
+import oa.model.Privilege;
 import oa.model.Role;
 import oa.model.User;
 import oa.service.IUserService;
@@ -27,6 +28,20 @@ public class UserServiceImpl extends ServiceImpl<User> implements IUserService {
 		User user =  dao.uniqueResult("from User u where u.id = ?", id);
 		for(Role role : user.getRoles()){
 			role.getId();
+		}
+		return user;
+	}
+
+	public User getUser(String loginName, String password) {
+		return dao.uniqueResult("from User u where u.loginName = ? and u.password = ?", loginName, password);
+	}
+
+	public User getUserAllInformation(int id) {
+		User user =  dao.uniqueResult("from User u where u.id = ?", id);
+		for(Role role : user.getRoles()){
+			for(Privilege privilege : role.getPrivileges()){
+				privilege.getId();
+			}
 		}
 		return user;
 	}

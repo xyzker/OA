@@ -33,11 +33,11 @@
                 <table cellpadding="0" cellspacing="0" class="mainForm">
                     <tr>
                         <td width="100">岗位名称</td>
-                        <td><s:textfield name="role.name" cssClass="InputStyle" /> *</td>
+                        <td><s:textfield name="roleName" value="%{role.name}"  cssClass="InputStyle" /> *</td>
                     </tr>
                     <tr>
                         <td>岗位说明</td>
-                        <td><s:textarea name="role.description" cssClass="TextareaStyle"></s:textarea></td>
+                        <td><s:textarea name="roleDescription" value="%{role.description}" cssClass="TextareaStyle"></s:textarea></td>
                     </tr>
                 </table>
             </div>

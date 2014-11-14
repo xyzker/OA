@@ -38,7 +38,7 @@
 				<td>
 					<s:a action="delete?role.id=%{id}" namespace="/role" onclick="return confirm('确定要删除吗？')">删除</s:a>
 					<s:a action="editUI?role.id=%{id}" namespace="/role">修改</s:a>
-					<a href="setPrivilegeUI.html">设置权限</a>
+					<s:a action="setPrivilegeUI?role.id=%{id}" namespace="/role">设置权限</s:a>
 				</td>
 			</tr>
         </s:iterator>
