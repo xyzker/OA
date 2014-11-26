@@ -11,7 +11,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
 
-/*
+/**
  * ¸ÚÎ»
  */
 @Entity

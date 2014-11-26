@@ -1,8 +1,11 @@
 package oa.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,9 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
-/*
+/**
  * ÓÃ»§
  */
 @Entity
@@ -27,6 +31,9 @@ public class User {
 			inverseJoinColumns = {@JoinColumn(name = "role_id")})
 	@OrderBy("id asc")
 	private Set<Role> roles = new HashSet<Role>();
+	
+	@OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
+	private List<LeaveBill> leaveBills = new ArrayList<LeaveBill>();
 	
 	private String loginName; // µÇÂ¼Ãû
 	private String password; // ÃÜÂë
@@ -142,6 +149,14 @@ public class User {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public void setLeaveBills(List<LeaveBill> leaveBills) {
+		this.leaveBills = leaveBills;
+	}
+
+	public List<LeaveBill> getLeaveBills() {
+		return leaveBills;
 	}
 	
 	
