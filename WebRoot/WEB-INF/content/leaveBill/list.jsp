@@ -29,22 +29,46 @@
 				<td width="15%">请假事由</td>
 				<td width="20%">请假备注</td>
 				<td width="15%">请假时间</td>
-				<td width="5%">请假状态</td>
-				<td width="25%">相关操作</td>
+				<td width="10%">请假状态</td>
+				<td width="20%">相关操作</td>
             </tr>
         </thead>
 
 		<!--显示数据列表-->
         <tbody id="TableData" class="dataContainer" datakey="departmentList">
         
-        <s:iterator value="departmentList">
+        <s:iterator value="leaveBillList">
 			<tr class="TableDetail1 template">
-				<td><s:a action="list?parent.id=%{id}" namespace="/department">${name}</s:a>&nbsp;</td>
-				<td>${parent.name}&nbsp;</td>
-				<td>${description}&nbsp;</td>
+				<td>${id}&nbsp;</td>
+				<td>${user.loginName}&nbsp;</td>
+				<td>${days}&nbsp;</td>
+				<td>${content}&nbsp;</td>
+				<td>${remark}&nbsp;</td>
+				<td><s:date name="leaveDate" format="yyyy-MM-dd HH:mm:ss"/>&nbsp;</td>
 				<td>
-					<s:a action="delete?department.id=%{id}&parent.id=%{parent.id}" namespace="/department" onclick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')">删除</s:a>
-					<s:a action="editUI?department.id=%{id}" namespace="/department">修改</s:a>
+					<s:if test="state==0">
+			        			初始录入
+			        		</s:if>
+			 				<s:elseif test="state==1">
+			 					审核中
+			 				</s:elseif>
+			 				<s:else>
+			 					审核完成
+			 				</s:else>
+				</td>
+				<td>
+					<s:if test="state==0">
+	        			<s:a action="editUI?leaveBill.id=%{id}" namespace="/leaveBill" >修改</s:a>
+						<s:a action="delete?leaveBill.id=%{id}" namespace="/leaveBill"  onclick="return confirm('确定要删除吗？')" >删除</s:a>
+	        			<s:a action="startProcess?leaveBill.id=%{id}" namespace="/workflow" >申请请假</s:a>
+	        		</s:if>
+	 				<s:elseif test="state==1">
+	 					<s:a action="viewHisComment?leaveBill.id=%{id}" namespace="/workflow" >查看审核记录</s:a>
+	 				</s:elseif>
+	 				<s:else>
+						<s:a action="delete?leaveBill.id=%{id}" namespace="/leaveBill"  onclick="return confirm('确定要删除吗？')" >删除</s:a>
+						<s:a action="viewHisComment?leaveBill.id=%{id}" namespace="/workflow" >查看审核记录</s:a
+	 				</s:else>
 				</td>
 			</tr>
 		</s:iterator>	

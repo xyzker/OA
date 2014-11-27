@@ -2,6 +2,7 @@ package oa.service.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 import java.util.zip.ZipInputStream;
 
@@ -106,6 +107,17 @@ public class WorkflowServiceImpl implements IWorkflowService {
 							.orderByProcessDefinitionVersion().asc()//
 							.list();
 		return list;
+	}
+	
+	/**使用部署对象ID和资源图片名称，获取图片的输入流*/
+	public InputStream findImageInputStream(String deploymentId,
+			String imageName) {
+		return repositoryService.getResourceAsStream(deploymentId, imageName);
+	}
+	
+	/**根据部署ID级联删除部署*/
+	public void deleteDeploymentById(String deploymentId) {
+		repositoryService.deleteDeployment(deploymentId, true);
 	}
 	
 }

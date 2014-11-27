@@ -41,7 +41,7 @@
 				<td>${name}&nbsp;</td>
 				<td><s:date name="deploymentTime" format="yyyy-MM-dd HH:mm:ss"/>&nbsp;</td>
 				<td>
-					<s:a action="deleteDeployment?deployment.id=%{id}" namespace="/workflow" onclick="return window.confirm('确认删除吗？')">删除</s:a>
+					<s:a action="delDeployment?deploymentId=%{id}" namespace="/workflow" onclick="return window.confirm('确认删除吗？')">删除</s:a>
 				</td>
 			</tr>
 		</s:iterator>	
@@ -95,7 +95,7 @@
 				<td>${diagramResourceName}&nbsp;</td>
 				<td>${deploymentId}&nbsp;</td>
 				<td>
-					<a target="_blank" href="/workflow/viewImage?deploymentId=<s:property value="deploymentId"/>&imageName=<s:property value="diagramResourceName"/>">查看流程图</a> 
+					<a target="_blank" href="<s:url value='/workflow/viewImage?deploymentId=%{deploymentId}&imageName=%{diagramResourceName}'/>">查看流程图</a> 
 				</td>
 			</tr>
 		</s:iterator>	

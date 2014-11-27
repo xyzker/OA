@@ -1,6 +1,8 @@
 package oa.action;
 
 import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import oa.service.IWorkflowService;
 
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -28,6 +31,9 @@ public class WorkflowAction extends ActionSupport {
 	
 	private File file;
 	private String filename;
+	
+	private String deploymentId;
+	private String imageName;
 	
 	/**
 	 * 部署管理首页显示
@@ -49,6 +55,36 @@ public class WorkflowAction extends ActionSupport {
 	public String newdeploy(){
 		//完成部署
 		workflowService.saveNewDeploy(file,filename);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 查看流程图
+	 * @throws Exception 
+	 */
+	@Action(value="/workflow/viewImage")
+	public String viewImage() throws Exception{
+		//获取资源文件表（act_ge_bytearray）中资源图片输入流InputStream
+		InputStream in = workflowService.findImageInputStream(getDeploymentId(),getImageName());
+		//从response对象获取输出流
+		OutputStream out = ServletActionContext.getResponse().getOutputStream();
+		//将输入流中的数据读取出来，写到输出流中
+		for(int b=-1;(b=in.read())!=-1;){
+			out.write(b);
+		}
+		out.close();
+		in.close();
+		//将图写到页面上，用输出流写
+		return null;
+	}
+	
+	/**
+	 * 删除部署信息
+	 */
+	@Action(value="/workflow/delDeployment", results={@Result(type="redirectAction", 
+			location="deployHome")})
+	public String delDeployment(){
+		workflowService.deleteDeploymentById(deploymentId);
 		return SUCCESS;
 	}
 
@@ -90,6 +126,22 @@ public class WorkflowAction extends ActionSupport {
 
 	public String getFilename() {
 		return filename;
+	}
+
+	public void setDeploymentId(String deploymentId) {
+		this.deploymentId = deploymentId;
+	}
+
+	public String getDeploymentId() {
+		return deploymentId;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+
+	public String getImageName() {
+		return imageName;
 	}
 
 }
