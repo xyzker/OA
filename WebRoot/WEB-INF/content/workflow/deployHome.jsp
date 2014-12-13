@@ -31,9 +31,9 @@
         </thead>
 
 		<!--显示数据列表-->
-        <tbody id="TableData" class="dataContainer" datakey="departmentList">
+        <tbody id="TableData" class="dataContainer" >
         <s:if test="depList==null || depList.size()==0">
-        	没有任何部署管理信息！
+        	<div style="color:red">没有任何部署管理信息！</div>
         </s:if>
         <s:iterator value="depList">
 			<tr class="TableDetail1 template">
@@ -81,9 +81,9 @@
         </thead>
 
 		<!--显示数据列表-->
-        <tbody id="TableData" class="dataContainer" datakey="departmentList">
+        <tbody id="TableData" class="dataContainer">
         <s:if test="pdList==null || pdList.size()==0">
-        	没有任何流程定义信息！
+        	<div style="color:red">没有任何流程定义信息！</div>
         </s:if>
         <s:iterator value="pdList">
 			<tr class="TableDetail1 template">

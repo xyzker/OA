@@ -45,5 +45,4 @@ public class UserServiceImpl extends ServiceImpl<User> implements IUserService {
 		}
 		return user;
 	}
-
 }

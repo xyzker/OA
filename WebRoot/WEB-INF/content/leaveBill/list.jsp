@@ -35,8 +35,10 @@
         </thead>
 
 		<!--显示数据列表-->
-        <tbody id="TableData" class="dataContainer" datakey="departmentList">
-        
+        <tbody id="TableData" class="dataContainer">
+        <s:if test="leaveBillList==null || leaveBillList.size()==0">
+        	<div style="color:red">您尚无任何请假单信息！</div>
+        </s:if>
         <s:iterator value="leaveBillList">
 			<tr class="TableDetail1 template">
 				<td>${id}&nbsp;</td>
@@ -60,14 +62,14 @@
 					<s:if test="state==0">
 	        			<s:a action="editUI?leaveBill.id=%{id}" namespace="/leaveBill" >修改</s:a>
 						<s:a action="delete?leaveBill.id=%{id}" namespace="/leaveBill"  onclick="return confirm('确定要删除吗？')" >删除</s:a>
-	        			<s:a action="startProcess?leaveBill.id=%{id}" namespace="/workflow" >申请请假</s:a>
+	        			<s:a action="startProcess?leaveBillId=%{id}" namespace="/workflow" >申请请假</s:a>
 	        		</s:if>
 	 				<s:elseif test="state==1">
 	 					<s:a action="viewHisComment?leaveBill.id=%{id}" namespace="/workflow" >查看审核记录</s:a>
 	 				</s:elseif>
 	 				<s:else>
 						<s:a action="delete?leaveBill.id=%{id}" namespace="/leaveBill"  onclick="return confirm('确定要删除吗？')" >删除</s:a>
-						<s:a action="viewHisComment?leaveBill.id=%{id}" namespace="/workflow" >查看审核记录</s:a
+						<s:a action="viewHisComment?leaveBill.id=%{id}" namespace="/workflow" >查看审核记录</s:a>
 	 				</s:else>
 				</td>
 			</tr>

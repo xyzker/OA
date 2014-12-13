@@ -62,9 +62,15 @@
                 <li class="Line"></li>
                 
                 <!-- 是否有待审批文档的提示1 -->
-                <li><a href="${pageContext.request.contextPath}/formFlowAction_myTaskList.action" target="right">
+                <li><a href="${pageContext.request.contextPath}/workflow/listTask" target="right">
                 		<img border="0" width="12" height="14" src="${pageContext.request.contextPath}/style/images/top/wait.gif" /> 
-                		待办事项（<span id="wait" class="taskListSize">0</span>）
+                		待办事项（
+                		<s:if test="taskListSize == 0">
+                			0
+                		</s:if>
+                		<s:else>
+                			<span style="color:red">${taskListSize}</span>
+                		</s:else>）
                 	</a>
                 </li>
                 <li class="Line"></li>
